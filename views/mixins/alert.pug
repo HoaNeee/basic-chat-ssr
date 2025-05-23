@@ -1,0 +1,9 @@
+mixin alert-success(time)
+  - if(messages.success)
+      div(class="alert alert-success alert-custom" time=time)
+        p #{messages.success}
+
+mixin alert-error(time)
+  - if(messages.error)
+      div(class="alert alert-danger alert-custom" time=time)
+        p #{messages.error}

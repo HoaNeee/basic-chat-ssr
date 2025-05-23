@@ -1,0 +1,26 @@
+extends ../../layouts/auth.pug
+
+block main 
+  div(class="auth")
+    form(
+      action=`/auth/register`
+      class=""
+      method="POST"
+      style="width: 400px; margin: 0 auto;"
+    ) 
+      h2(class="my-3") Đăng Ký
+      .form-group 
+        label(for="fullname") Họ tên
+        input(type="text" class="form-control" name="fullname" id="fullname" required) 
+      .form-group 
+        label(for="email") Email
+        input(type="email" class="form-control" name="email" id="email" required) 
+      .form-group 
+        label(for="pass") Password
+        input(type="password" class="form-control" name="password" id="pass" required)
+  
+      
+       
+      button(class="btn btn-primary btn-block") Đăng Ký
+      div(class="text-center mt-3")  
+        a(href="/auth/login") Đã có tài khoản? Đăng nhập

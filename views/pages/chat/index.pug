@@ -1,0 +1,52 @@
+extends ../../layouts/default.pug
+
+block main 
+  h2 Chat page
+  div(class="chat")
+    div(data-id=user._id)
+    div(class="inner-body")
+      each item in chats
+        div(class=(item.user_id === String(user._id) ? "inner-outgoing" : "inner-incoming")) 
+          - if(item.user_id !== String(user._id))
+              .inner-name 
+                p #{item.user.fullname}
+          - if(item.content)
+              .inner-content 
+                p #{item.content}
+          - if(item.images && item.images.length > 0)
+              .inner-images
+                each img in item.images
+                  img(src=img, alt="")
+            
+      div(class="inner-list-typing")
+
+
+    div(class="custom-file-container" data-upload-id="abcxyz")
+      div(class="inner-content-upload")
+        //- div(class="inner-item")
+        //-   img(src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/anh-anime-nam-8.jpg", alt="")
+        //-   button(class="btn-delete-item") X
+        
+    .send-container
+      form(action="" class="form-send-message")
+        input(type="text" placeholder="Nhập nội dung..." class="input-message" name='message')
+        label(for="picker-images" class="picker-images") 
+          <i class="fa-regular fa-image"></i>
+        div(class="d-none") 
+          input(type="file" multiple name="images" id="picker-images")
+        span(class="btn-icon") 
+          <i class="fa-regular fa-face-smile"></i>
+        button(type="submit") 
+          i(class="fa-solid fa-paper-plane")
+    
+  
+  div(class="tooltip" role="tooltip")
+    emoji-picker
+
+  //- socket
+  script(src="/socket.io/socket.io.js")
+  
+  //- emoji
+  script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+
+  script(type="module" src="/js/chat.js") 
