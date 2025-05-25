@@ -8,6 +8,15 @@ const userSchema = new mongoose.Schema({
   phone: String,
   status: String,
   token: String,
+  requestFriend: Array,
+  acceptFriend: Array,
+  listFriend: [
+    {
+      user_id: String,
+      room_id: String,
+    },
+  ],
+  statusOnline: String,
   deleted: {
     type: Boolean,
     default: false,

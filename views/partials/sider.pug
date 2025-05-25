@@ -1,5 +1,11 @@
 .sider 
   .inner-content
-    a(href=`/`) Trang tổng quan
+    a(href=`/`) Trang chủ
     a(href=`/chat`) Chat 
+    a(href=`/users/not-friends`) Người dùng 
+    a(href=`/users/friends`) Danh sách bạn bè 
+    a(href=`/users/requests`) Lời mời đã gửi
+      span(class="badge badge-danger ml-2" data-request-length) #{user.requestFriend.length}
+    a(href=`/users/accepts`) Lời mời kết bạn 
+      span(class="badge badge-danger ml-2" data-accept-length) #{user.acceptFriend.length}
     

@@ -14,6 +14,10 @@ module.exports.requireAuth = async (req, res, next) => {
       res.redirect("/auth/login");
       return;
     } else {
+      if (user.statusOnline !== "online") {
+        await User.updateOne({ token: token }, { statusOnline: "online" });
+      }
+
       res.locals.user = user;
       next();
     }

@@ -1,0 +1,22 @@
+extends ../../layouts/default.pug
+
+block main 
+  h2 Danh sách bạn bè
+  div(data-my-id=user._id)
+  div(class="list-user-friend row")
+    each item in users
+      .col-4
+        div(class="box-user" data-id-user=item._id)
+          .inner-img 
+            img(src=(item.avatar ? item.avatar : "/images/avatarNotFound.jpg"), alt="")
+          .inner-info 
+            p #{item.fullname}
+            div 
+              a(href=`/chat/${item.room_chat_id}` class="btn btn-primary btn-sm" btn-chat-friend data-id=item._id) Nhắn tin
+              a(class="btn btn-secondary btn-sm" btn-delete-friend data-id=item._id) Hủy bạn bè
+          div(class="status-user" data-statusOnline=item.statusOnline)
+            <i class="fa-solid fa-circle"></i>      
+  
+block script 
+  script(type="module" src="/js/users.js") 
+  

@@ -116,7 +116,7 @@ header .inner-header-content a {
 
 /* chat */
 .chat {
-  width: 650px;
+  width: 550px;
   margin: 0 auto;
   border: 2px solid #ddd;
   border-radius: 5px;
@@ -332,4 +332,171 @@ header .inner-header-content a {
   font-size: 12px;
   border: none;
   border-radius: 50%;
+}
+
+/* users */
+
+.list-user-not-friend,
+.list-user-accept,
+.list-user-request {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.list-user-not-friend .box-user,
+.list-user-accept .box-user,
+.list-user-request .box-user,
+.list-user-friend .box-user {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 2px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 237px;
+}
+.list-user-not-friend .box-user .inner-img,
+.list-user-accept .box-user .inner-img,
+.list-user-request .box-user .inner-img,
+.list-user-friend .box-user .inner-img {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.box-user .inner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.box-user .inner-info {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.box-user .list-btn {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px;
+}
+
+/* not-friend */
+.list-user-not-friend .box-user [btn-cancel-request],
+.list-user-not-friend .box-user [btn-refuse-friend],
+.list-user-not-friend .box-user [btn-accept-friend],
+.list-user-not-friend .box-user [btn-refused-friend],
+.list-user-not-friend .box-user [btn-accepted-friend] {
+  display: none;
+}
+
+.list-user-not-friend .box-user.add [btn-cancel-request] {
+  display: inline-block;
+}
+
+.list-user-not-friend .box-user.add [btn-request-friend],
+.list-user-not-friend .box-user.receive [btn-request-friend] {
+  display: none;
+}
+
+.list-user-not-friend .box-user.receive [btn-refuse-friend],
+.list-user-not-friend .box-user.receive [btn-accept-friend] {
+  display: inline-block;
+}
+
+.list-user-not-friend .box-user.accept [btn-accepted-friend] {
+  display: inline-block;
+}
+.list-user-not-friend .box-user.accept [btn-refuse-friend],
+.list-user-not-friend .box-user.accept [btn-accept-friend],
+.list-user-not-friend .box-user.accept [btn-request-friend] {
+  display: none;
+}
+.list-user-not-friend .box-user.refuse [btn-refused-friend] {
+  display: inline-block;
+}
+
+.list-user-not-friend .box-user.refuse [btn-refuse-friend],
+.list-user-not-friend .box-user.refuse [btn-accept-friend],
+.list-user-not-friend .box-user.refuse [btn-request-friend] {
+  display: none;
+}
+
+/* request */
+
+.list-user-request .box-user [btn-cancel-request] {
+  display: none;
+}
+
+.list-user-request .box-user.add [btn-cancel-request] {
+  display: inline-block;
+}
+
+.list-user-request .box-user [btn-refused-friend],
+.list-user-request .box-user [btn-accepted-friend],
+.list-user-request .box-user [btn-canceled-friend] {
+  display: none;
+}
+
+.list-user-request .box-user.cancel [btn-canceled-friend] {
+  display: inline-block;
+}
+
+.list-user-request .box-user.refuse [btn-refused-friend] {
+  display: inline-block;
+}
+
+.list-user-request .box-user.accept [btn-accepted-friend] {
+  display: inline-block;
+}
+
+/* accept */
+.list-user-accept .box-user [btn-refused-friend],
+.list-user-accept .box-user [btn-accepted-friend],
+.list-user-accept .box-user [btn-canceled-friend],
+.list-user-accept .box-user.accept [btn-refuse-friend],
+.list-user-accept .box-user.accept [btn-accept-friend],
+.list-user-accept .box-user.cancel [btn-accept-friend],
+.list-user-accept .box-user.cancel [btn-refuse-friend] {
+  display: none;
+}
+
+.list-user-accept .box-user.accept [btn-accepted-friend] {
+  display: inline-block;
+}
+
+.list-user-accept .box-user.refuse [btn-refused-friend] {
+  display: inline-block;
+}
+.list-user-accept .box-user.refuse [btn-refuse-friend] {
+  display: none;
+}
+
+.list-user-accept .box-user.refuse [btn-accept-friend] {
+  display: none;
+}
+
+.list-user-accept .box-user.cancel [btn-canceled-friend] {
+  display: inline-block;
+}
+
+/* status user */
+.list-user-friend .box-user {
+  position: relative;
+}
+
+.list-user-friend .box-user i {
+  position: absolute;
+  top: 8px;
+  right: 9px;
+  font-size: 10px;
+  color: green;
+  opacity: 0;
+}
+
+.list-user-friend .box-user .status-user[data-statusOnline="online"] i {
+  opacity: 1;
 }

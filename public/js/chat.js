@@ -1,6 +1,6 @@
 import * as Popper from "https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm/index.js";
 
-const socket = io();
+// const socket = io();
 
 //images preview;
 let arrImageGlobals = [];

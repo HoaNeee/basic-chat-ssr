@@ -1,0 +1,23 @@
+extends ../../layouts/default.pug
+
+block main 
+  h2 Trang danh sách người dùng
+  div(data-my-id=user._id)
+  div(class="list-user-not-friend")
+    each item in users
+      div(class="box-user" data-id-user=item._id)
+        .inner-img 
+          img(src=(item.avatar ? item.avatar : "/images/avatarNotFound.jpg"), alt="")
+        .inner-info 
+          p #{item.fullname}
+          div 
+            button(class="btn btn-primary btn-sm" btn-request-friend data-id=item._id) Kết bạn
+            button(class="btn btn-secondary btn-sm" btn-cancel-request data-id=item._id) Hủy
+            button(class="btn btn-primary btn-sm" btn-accept-friend data-id=item._id) Chấp nhận
+            button(class="btn btn-secondary btn-sm" btn-refuse-friend data-id=item._id) Từ chối
+            button(class="btn btn-secondary btn-sm" disabled btn-refused-friend data-id=item._id) Đã từ chối
+            button(class="btn btn-primary btn-sm" disabled btn-accepted-friend data-id=item._id) Đã chấp nhận
+  
+block script 
+  script(type="module" src="/js/users.js") 
+  

@@ -55,9 +55,16 @@ module.exports.loginPost = async (req, res) => {
     }
 
     const token = generate.string(20);
-    await User.updateOne({ email: email }, { token: token });
+    await User.updateOne(
+      { email: email },
+      { token: token, statusOnline: "online" }
+    );
 
     res.cookie("tokenUserChat", token);
+
+    _io.once("connection", (socket) => {
+      socket.broadcast.emit("SERVER_RETURN_USER_ONLINE", String(user._id));
+    });
 
     req.flash("success", "Đăng nhập thành công");
     res.redirect("/");
@@ -81,6 +88,7 @@ module.exports.registerPost = async (req, res) => {
     const user = new User({
       ...req.body,
       password: password,
+      status: "active",
     });
     await user.save();
     req.flash("success", "Tạo tài khoản thành công");
@@ -93,6 +101,18 @@ module.exports.registerPost = async (req, res) => {
 
 //[GET] /auth/logout
 module.exports.logout = async (req, res) => {
+  await User.updateOne(
+    { token: req.cookies.tokenUserChat },
+    { statusOnline: "offline" }
+  );
+
+  const user = await User.findOne({ token: req.cookies.tokenUserChat });
+
+  _io.once("connection", (socket) => {
+    console.log("conected");
+    socket.broadcast.emit("SERVER_RETURN_USER_OFFLINE", String(user._id));
+  });
+
   res.clearCookie("tokenUserChat");
   res.redirect("/auth/login");
 };
