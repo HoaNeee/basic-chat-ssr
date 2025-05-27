@@ -1,0 +1,96 @@
+extends ../../layouts/default.pug
+
+block main 
+  div(class="chat")
+    div(class="inner-list collapsed")
+      div(style="height:100%;")
+        .inner-header 
+          .inner-left
+            p(class="inner-title") Message 
+            span(class="inner-length-notitfy") 12
+          .inner-right 
+            <i btn-collapse-message-body class="fa-solid fa-up-right-and-down-left-from-center"></i>
+
+        .inner-list-room.scroll-none
+          a(href="/chat/room/community" class="item-room")
+            div(class="item-info")
+              .inner-image 
+                img(src="/images/avatarNotFound.jpg", alt="")
+              .inner-info-room
+                p(class="inner-title") Phòng cộng đồng
+                p(class="inner-status") online
+            span(class="inner-time") 12m
+          
+          each room in roomsChat 
+            a(href=`/chat/room/${room._id}` class="item-room")
+              div(class="item-info")
+                .inner-image
+                  - if(room.typeRoom === 'friend')
+                      img(src="/images/avatarNotFound.jpg", alt="")
+                  - else if(typeRoom === 'group')
+                      img(src=(room.avatar ? room.avatar : "/images/avatarNotFound.jpg"), alt="")
+                - if(room.typeRoom === 'friend')
+                    .inner-info-room
+                      p(class="inner-title") #{room.fullnameUser}
+                      p(class="inner-status") online
+                - else if(room.typeRoom === 'group')
+                    .inner-info-room
+                      p(class="inner-title") #{room.title}
+                      p(class="inner-status") online
+              span(class="inner-time") 12m
+       
+    div(class="inner-content-body collapsed") 
+      div(data-id=user._id)
+      div(class="inner-info")
+        div(class="inner-info-room")
+          div(class="inner-left")
+            .inner-image 
+              img(src="/images/avatarNotFound.jpg", alt="")
+            .inner-i
+              p(class="inner-title") #{infoRoom.title}
+              span(class="inner-status") Online
+           
+      div(class="outler-body")
+        div(class="inner-body scroll-none")
+          each item in chats
+            div(class=(item.user_id === String(user._id) ? "inner-outgoing" : "inner-incoming")) 
+              - if(item.user_id !== String(user._id))
+                  .inner-name 
+                    p #{item.user.fullname}
+              - if(item.content)
+                  .inner-content 
+                    p #{item.content}
+              - if(item.images && item.images.length > 0)
+                  .inner-images
+                    each img in item.images
+                      img(src=img, alt="")
+                
+          div(class="inner-list-typing")
+
+
+      div(class="custom-file-container" data-upload-id="abcxyz")
+        div(class="inner-content-upload")
+          //- div(class="inner-item")
+          //-   img(src="https://hoanghamobile.com/tin-tuc/wp-content/uploads/2023/08/anh-anime-nam-8.jpg", alt="")
+          //-   button(class="btn-delete-item") X
+        
+      .send-container
+        form(action="" class="form-send-message")
+          input(type="text" placeholder="Nhập nội dung..." class="input-message" name='message')
+          label(for="picker-images" class="picker-images") 
+            <i class="fa-regular fa-image"></i>
+          div(class="d-none") 
+            input(type="file" multiple name="images" id="picker-images")
+          span(class="btn-icon") 
+            <i class="fa-regular fa-face-smile"></i>
+          button(type="submit") 
+            i(class="fa-solid fa-paper-plane")
+    
+  
+  div(class="tooltip" role="tooltip")
+    emoji-picker
+
+  //- emoji
+  script(type="module" src="https://cdn.jsdelivr.net/npm/emoji-picker-element@^1/index.js")
+
+  script(type="module" src="/js/chat.js") 

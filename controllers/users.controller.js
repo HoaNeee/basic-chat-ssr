@@ -106,7 +106,7 @@ module.exports.friends = async (req, res) => {
       );
       item.room_chat_id = myUserIdInListFriendOfB.room_id;
     }
-
+    usersSocket(res);
     res.render("pages/users/friends.pug", {
       titlePage: "Bạn bè",
       users: users,

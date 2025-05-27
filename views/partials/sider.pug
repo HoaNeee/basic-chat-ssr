@@ -1,11 +1,26 @@
-.sider 
-  .inner-content
-    a(href=`/`) Trang chủ
-    a(href=`/chat`) Chat 
-    a(href=`/users/not-friends`) Người dùng 
-    a(href=`/users/friends`) Danh sách bạn bè 
-    a(href=`/users/requests`) Lời mời đã gửi
+.sider
+  div(class="outler-logo")
+    div(class="inner-logo")
+      a(href="/") Q  
+  .inner-nav-sider
+    a(href=`/` data-path-home)
+      <i class="fa-solid fa-house"></i>
+      span(class="inner-desc-nav" id="tag-nav") Trang chủ
+    a(href=`/chat`) 
+      <i class="fa-brands fa-rocketchat"></i> 
+      span(class="inner-desc-nav" id="tag-nav") Phòng chat
+    a(href=`/users/not-friends`) 
+      <i class="fa-solid fa-users"></i>
+      span(class="inner-desc-nav" id="tag-nav") Người dùng 
+    a(href=`/users/friends`) 
+      <i class="fa-solid fa-user"></i>
+      span(class="inner-desc-nav" id="tag-nav") Bạn bè
+    a(href=`/users/requests`) 
+      <i class="fa-solid fa-person-circle-question"></i>
+      span(class="inner-desc-nav" id="tag-nav") Lời mời đã gửi
       span(class="badge badge-danger ml-2" data-request-length) #{user.requestFriend.length}
-    a(href=`/users/accepts`) Lời mời kết bạn 
+    a(href=`/users/accepts`) 
+      <i class="fa-solid fa-user-plus"></i> 
+      span(class="inner-desc-nav" id="tag-nav") Lời mời đã nhận
       span(class="badge badge-danger ml-2" data-accept-length) #{user.acceptFriend.length}
     

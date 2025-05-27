@@ -57,6 +57,24 @@ if (btnsAccept && btnsAccept.length > 0) {
   }
 }
 
+//delete
+const btnsDelete = document.querySelectorAll(".box-user [btn-delete-friend]");
+if (btnsDelete && btnsDelete.length > 0) {
+  for (const btn of btnsDelete) {
+    const id = btn.getAttribute("data-id");
+
+    btn.addEventListener("click", () => {
+      const boxUser = document.querySelector(
+        `.list-user-friend .box-user[data-id-user="${id}"]`
+      );
+      if (boxUser) {
+        boxUser.classList.add("delete");
+        socket.emit("CLIENT_DELETE_FRIEND", id);
+      }
+    });
+  }
+}
+
 const drawSocketHelper = (data, add, remove) => {
   const userId = data.userId;
   const myUserId = data.myId;
@@ -164,5 +182,15 @@ socket.on("SERVER_RETURN_USER_ONLINE", (data) => {
     if (divStatus) {
       divStatus.setAttribute("data-statusOnline", "online");
     }
+  }
+});
+
+//SERVER_RETURN_DELETE_FRIEND
+socket.on("SERVER_RETURN_DELETE_FRIEND", (data) => {
+  const userId = data.userId;
+  const listFriend = document.querySelector(".list-user-friend");
+  const boxUser = listFriend.querySelector(`div[data-id-user="${userId}"]`);
+  if (boxUser) {
+    boxUser.classList.add("delete");
   }
 });

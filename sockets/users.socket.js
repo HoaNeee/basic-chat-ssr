@@ -185,8 +185,17 @@ module.exports = async (res) => {
             },
           ],
         };
-        roomChat = new RoomChat(objectRoom);
-        await roomChat.save();
+        const oldRoom = await RoomChat.findOne({
+          typeRoom: "friend",
+          deleted: false,
+          $and: [{ "users.user_id": myId }, { "users.user_id": userId }],
+        });
+        if (oldRoom) {
+          roomChat = oldRoom;
+        } else {
+          roomChat = new RoomChat(objectRoom);
+          await roomChat.save();
+        }
       }
 
       if (userIdOfBInRequestA) {
@@ -235,6 +244,49 @@ module.exports = async (res) => {
         });
       }
       // console.log("accept");
+    });
+
+    //CLIENT_DELETE_FRIEND
+    socket.on("CLIENT_DELETE_FRIEND", async (data) => {
+      const user = res.locals.user;
+      const myId = String(user._id); // A
+      const userId = data; // B
+
+      const userIdOfAInFriendB = await User.findOne({
+        _id: userId,
+        "listFriend.user_id": myId,
+      });
+
+      const userIdOfBInFriendA = await User.findOne({
+        _id: myId,
+        "listFriend.user_id": userId,
+      });
+
+      if (userIdOfAInFriendB) {
+        const index = userIdOfAInFriendB.listFriend.findIndex(
+          (item) => item.user_id === myId
+        );
+        if (index !== -1) {
+          userIdOfAInFriendB.listFriend.splice(index, 1);
+          await userIdOfAInFriendB.save();
+        }
+      }
+
+      if (userIdOfBInFriendA) {
+        const index = userIdOfBInFriendA.listFriend.findIndex(
+          (item) => item.user_id === userId
+        );
+        if (index !== -1) {
+          userIdOfBInFriendA.listFriend.splice(index, 1);
+          await userIdOfBInFriendA.save();
+        }
+      }
+
+      if (userIdOfAInFriendB || userIdOfBInFriendA) {
+        socket.broadcast.emit("SERVER_RETURN_DELETE_FRIEND", {
+          userId: myId,
+        });
+      }
     });
   });
 };

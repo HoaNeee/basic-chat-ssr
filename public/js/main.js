@@ -22,3 +22,19 @@ socket.on("SERVER_RETURN_USER_OFFLINE", (data) => {
     }
   }
 });
+
+const pathName = window.location.pathname;
+const navActive = document.querySelector(`a[href="${pathName}"]`);
+if (navActive) {
+  navActive.classList.add("active");
+}
+if (pathName === "/") {
+  const navActive = document.querySelector("a[data-path-home]");
+  navActive.classList.add("active");
+}
+
+const sider = document.querySelector(".sider");
+
+// window.addEventListener("beforeunload", (e) => {
+//   socket.emit("CLIENT_SEND_USER_OFFLINE", "offline");
+// });

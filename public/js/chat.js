@@ -237,3 +237,20 @@ socket.on("SERVER_RETURN_TYPING", (object) => {
 
   body.scrollTop = body.scrollHeight;
 });
+
+//expand message body
+const btnCollapseMessageBody = document.querySelector(
+  "[btn-collapse-message-body]"
+);
+if (btnCollapseMessageBody) {
+  btnCollapseMessageBody.addEventListener("click", () => {
+    const contentBodyMessage = document.querySelector(
+      ".chat .inner-content-body"
+    );
+    const listRoomChat = document.querySelector(".chat .inner-list");
+    if (listRoomChat && contentBodyMessage) {
+      listRoomChat.classList.toggle("collapsed");
+      contentBodyMessage.classList.toggle("collapsed");
+    }
+  });
+}
