@@ -8,34 +8,35 @@ block main
           .inner-left
             p(class="inner-title") Message 
             span(class="inner-length-notitfy") 12
-
-        .inner-list-room.scroll-none
-          a(href="/chat/room/community" class="item-room")
-            div(class="item-info")
-              .inner-image 
-                img(src="/images/avatarNotFound.jpg", alt="")
-              .inner-info-room
-                p(class="inner-title") Phòng cộng đồng
-                p(class="inner-status") online
-            span(class="inner-time") 12m
-
-          each room in roomsChat
-            a(href=`/chat/room/${room._id}` class="item-room")
+        .inner-content 
+          a(href="/chat/create-room" class="my-btn") Tạo phòng mới
+          .inner-list-room.scroll-none
+            a(href="/chat/room/community" class="item-room")
               div(class="item-info")
-                .inner-image
+                .inner-image 
+                  img(src="/images/avatarNotFound.jpg", alt="")
+                .inner-info-room
+                  p(class="inner-title") Phòng cộng đồng
+                  p(class="inner-status") online
+              span(class="inner-time") 12m
+
+            each room in roomsChat
+              a(href=`/chat/room/${room._id}` class="item-room")
+                div(class="item-info")
+                  .inner-image
+                    - if(room.typeRoom === 'friend')
+                        img(src=(room.avatarUser ? room.avatarUser : "/images/avatarNotFound.jpg"), alt="")
+                    - else if(room.typeRoom === 'group')
+                        img(src=(room.avatar ? room.avatar : "/images/avatarNotFound.jpg"), alt="")
                   - if(room.typeRoom === 'friend')
-                      img(src="/images/avatarNotFound.jpg", alt="")
-                  - else if(typeRoom === 'group')
-                      img(src=(room.avatar ? room.avatar : "/images/avatarNotFound.jpg"), alt="")
-                - if(room.typeRoom === 'friend')
-                    .inner-info-room
-                      p(class="inner-title") #{room.fullnameUser}
-                      p(class="inner-status") online
-                - else if(room.typeRoom === 'group')
-                    .inner-info-room
-                      p(class="inner-title") #{room.title}
-                      p(class="inner-status") #{room.statusUser}
-              span(class="inner-time") 12m 
+                      .inner-info-room
+                        p(class="inner-title") #{room.fullnameUser}
+                        p(class="inner-status") online
+                  - else if(room.typeRoom === 'group')
+                      .inner-info-room
+                        p(class="inner-title") #{room.title}
+                        p(class="inner-status") #{room.statusUser}
+                span(class="inner-time") 12m 
           
           
             

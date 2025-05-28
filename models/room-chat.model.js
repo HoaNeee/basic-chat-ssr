@@ -5,7 +5,7 @@ const roomChatSchema = new mongoose.Schema(
     title: String,
     typeRoom: String,
     avatar: String,
-    status: String,
+    status: String, //permission
     users: [
       {
         user_id: String,

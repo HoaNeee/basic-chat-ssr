@@ -38,3 +38,76 @@ const sider = document.querySelector(".sider");
 // window.addEventListener("beforeunload", (e) => {
 //   socket.emit("CLIENT_SEND_USER_OFFLINE", "offline");
 // });
+
+//SERVER_RETURN_REQUEST
+socket.on("SERVER_RETURN_REQUEST", (data) => {
+  const userId = data.userId;
+  const divElement = document.querySelector("div[data-my-id]");
+  const myId = divElement.getAttribute("data-my-id");
+
+  if (userId === myId) {
+    const badgeLengthAccept = document.querySelector("[data-accept-length]");
+    if (badgeLengthAccept) {
+      badgeLengthAccept.innerHTML = data.lengthAccept;
+    }
+  }
+});
+
+//SERVER_RETURN_CANCEL
+socket.on("SERVER_RETURN_CANCEL", (data) => {
+  const userId = data.userId;
+
+  const divElement = document.querySelector("div[data-my-id]");
+  const myId = divElement.getAttribute("data-my-id");
+
+  if (userId === myId) {
+    const badgeLengthAccept = document.querySelector("[data-accept-length]");
+    if (badgeLengthAccept) {
+      badgeLengthAccept.innerHTML = data.lengthAccept;
+    }
+  }
+});
+
+//SERVER_RETURN_REFUSE
+socket.on("SERVER_RETURN_REFUSE", (data) => {
+  const userId = data.userId;
+
+  const divElement = document.querySelector("div[data-my-id]");
+  const myId = divElement.getAttribute("data-my-id");
+
+  if (userId === myId) {
+    const badgeLengthRequest = document.querySelector("[data-request-length]");
+    if (badgeLengthRequest) {
+      badgeLengthRequest.innerHTML = data.lengthRequest;
+    }
+  }
+});
+
+//SERVER_RETURN_ACCEPT
+socket.on("SERVER_RETURN_ACCEPT", (data) => {
+  const userId = data.userId;
+
+  const divElement = document.querySelector("div[data-my-id]");
+  const myId = divElement.getAttribute("data-my-id");
+
+  if (userId === myId) {
+    const badgeLengthRequest = document.querySelector("[data-request-length]");
+    if (badgeLengthRequest) {
+      badgeLengthRequest.innerHTML = data.lengthRequest;
+    }
+  }
+});
+
+//SERVER_RETURN_LIST_REQUEST_USER_A
+socket.on("SERVER_RETURN_LIST_REQUEST_USER_A", (data) => {
+  const badgeLengthRequest = document.querySelector("[data-request-length]");
+  badgeLengthRequest.innerHTML = data;
+});
+
+//SERVER_RETURN_LIST_ACCEPT_USER_A
+socket.on("SERVER_RETURN_LIST_ACCEPT_USER_A", (data) => {
+  const badgeLengthAccept = document.querySelector("[data-accept-length]");
+  if (badgeLengthAccept) {
+    badgeLengthAccept.innerHTML = data;
+  }
+});

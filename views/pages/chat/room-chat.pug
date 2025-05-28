@@ -26,8 +26,8 @@ block main
               div(class="item-info")
                 .inner-image
                   - if(room.typeRoom === 'friend')
-                      img(src="/images/avatarNotFound.jpg", alt="")
-                  - else if(typeRoom === 'group')
+                      img(src=(room.avatarUser ? room.avatarUser : "/images/avatarNotFound.jpg"), alt="")
+                  - else if(room.typeRoom === 'group')
                       img(src=(room.avatar ? room.avatar : "/images/avatarNotFound.jpg"), alt="")
                 - if(room.typeRoom === 'friend')
                     .inner-info-room
@@ -49,6 +49,8 @@ block main
             .inner-i
               p(class="inner-title") #{infoRoom.title}
               span(class="inner-status") Online
+          div(class="inner-right")
+            <i class="fa-solid fa-left-right"></i>
            
       div(class="outler-body")
         div(class="inner-body scroll-none")
@@ -86,6 +88,25 @@ block main
           button(type="submit") 
             i(class="fa-solid fa-paper-plane")
     
+    div(class="inner-detail-room")
+      div(style="height:100%;")
+        .inner-header 
+          .inner-left
+            p(class="inner-title") Directory
+        - if(infoRoom.typeRoom && infoRoom.typeRoom === 'group')
+            .inner-list 
+              .inner-header-list
+                p(class="inner-title-list") Team Member 
+                  span(class="inner-length-member") 1
+              .inner-body-list
+                each item in infoRoom.users
+                  a(href=`` class="item-user")
+                    .inner-image 
+                      img(src=(item.avatar ? item.avatar : "/images/avatarNotFound.jpg"), alt="")
+                    .inner-info-user
+                      p(class="inner-title") #{item.fullname}
+                      p(class="inner-status") #{item.statusOnline}
+          
   
   div(class="tooltip" role="tooltip")
     emoji-picker

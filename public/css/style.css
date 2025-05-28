@@ -38,6 +38,23 @@ header .inner-header-content a {
   color: white;
 } */
 
+.my-btn {
+  padding: 10px;
+  border-radius: 9px;
+  background: #615ef0;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-block;
+  border: none;
+}
+
+.my-btn:hover {
+  text-decoration: none;
+  color: white;
+  background: #8280f1;
+}
+
 /* main  */
 
 .main {
@@ -49,7 +66,7 @@ header .inner-header-content a {
 /* sider */
 
 .main .sider-container {
-  width: 88px;
+  width: 71px;
   box-shadow: rgb(183 186 190 / 48%) 7px 2px 16px 0px,
     rgba(255, 255, 255, 0.8) -6px -2px 16px 0px;
   transition: all 0.3s ease-in-out;
@@ -76,11 +93,13 @@ header .inner-header-content a {
   transition: all 0.3s ease-in-out;
   font-size: 18px;
   font-weight: 600;
+  visibility: hidden;
 }
 
 .main .sider-container:hover .inner-nav-sider .inner-desc-nav {
   opacity: 1;
-  transition: all 0.3s ease-in-out;
+  transition: all 0.4s ease-in-out;
+  visibility: visible;
 }
 
 .main .sider .outler-logo {
@@ -112,7 +131,7 @@ header .inner-header-content a {
   flex-direction: column;
   gap: 5px;
   justify-content: center;
-  padding-left: 19px;
+  padding-left: 11px;
   margin-top: 48px;
 }
 .main .sider .inner-nav-sider a {
@@ -160,6 +179,10 @@ header .inner-header-content a {
   margin-left: 89px;
 }
 
+.main .inner-content-main:has(.create-room) {
+  padding: 20px;
+}
+
 /* alert */
 .alert-custom {
   position: fixed;
@@ -199,7 +222,6 @@ header .inner-header-content a {
 /* chat */
 .chat {
   height: 100%;
-  border-left: 2px solid #f0ecec;
   display: flex;
   overflow: hidden;
   max-height: 100vh;
@@ -209,6 +231,10 @@ header .inner-header-content a {
 .chat .inner-list {
   border-right: 2px solid #f0ecec;
   width: 100%;
+}
+
+.chat .inner-list .inner-content {
+  padding: 10px;
 }
 
 .chat .inner-list.collapsed {
@@ -319,6 +345,7 @@ header .inner-header-content a {
 .chat .inner-info .inner-info-room {
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 .chat .inner-info .inner-info-room .inner-left {
   display: flex;
@@ -334,6 +361,15 @@ header .inner-header-content a {
 .chat .inner-info .inner-info-room .inner-left .inner-status {
   font-size: 14px;
   color: #bababa;
+}
+
+.chat .inner-info .inner-info-room .inner-right {
+  cursor: pointer;
+}
+
+.chat .inner-info .inner-info-room .inner-right i {
+  font-size: 20px;
+  color: #8e8e8e;
 }
 
 .chat .inner-info .inner-info-room .inner-image {
@@ -354,6 +390,7 @@ header .inner-header-content a {
   max-height: 100vh;
   flex: 1;
   display: none;
+  border-right: 2px solid #f0ecec;
 }
 
 .chat .inner-content-body.collapsed {
@@ -453,7 +490,6 @@ header .inner-header-content a {
 .chat .inner-incoming .inner-content {
   background-color: #efefef;
   display: inline-block;
-
   border-radius: 18px;
   font-weight: 600;
   padding: 10px;
@@ -479,6 +515,89 @@ header .inner-header-content a {
 .chat .picker-images:hover,
 .btn-icon:hover {
   background: #ddd;
+}
+
+/* list user */
+
+.chat .inner-detail-room {
+  width: 100%;
+  max-width: 300px;
+}
+
+.chat .inner-detail-room .inner-header {
+  padding: 27px;
+  border-bottom: 2px solid #f0ecec;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat .inner-detail-room .inner-header .inner-title {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+.chat .inner-detail-room .inner-list {
+  padding: 10px;
+}
+
+.chat .inner-detail-room .inner-list .inner-title-list {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.chat .inner-detail-room .inner-list .inner-length-member {
+  font-size: 12px;
+  padding: 1px 4px;
+  background: #e1e1e1;
+  border-radius: 7px;
+  margin-left: 2px;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list {
+  margin-top: 10px;
+  max-height: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  overflow-y: auto;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list .inner-image {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  border-radius: 11px;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list .item-user {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+  cursor: pointer;
+  color: black;
+  border-radius: 5px;
+  gap: 8px;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list .item-user:hover {
+  text-decoration: none;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list .item-user .inner-title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list .item-user .inner-status {
+  font-size: 13px;
+  color: #bababa;
+}
+
+.chat .inner-detail-room .inner-list .inner-body-list .inner-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* emoji */
@@ -771,4 +890,18 @@ header .inner-header-content a {
 
 .scroll-none::-webkit-scrollbar {
   display: none;
+}
+
+/* create room */
+.create-room .inner-img {
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.create-room .box-user .inner-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

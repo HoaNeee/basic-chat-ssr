@@ -1,0 +1,22 @@
+extends ../../layouts/default.pug
+
+block main 
+  h3 Tạo phòng chat
+  .create-room
+    form(action="/chat/create-room" method="POST")
+      .form-group
+        label(for="title") Tiêu đề
+        input(type="text" class="form-control" id="title" name="title" required)  
+
+      p(class="my-3") Chọn thành viên cho phòng chat
+      .list-user-friend
+        each item in listFriend
+          div(class="box-user")
+            input(type="checkbox" name="userIds" value=item.user_id)
+            .inner-img 
+              img(src=(item.avatar ? item.avatar : "/images/avatarNotFound.jpg"), alt="")
+            .inner-info 
+              p #{item.fullname}
+
+      button(class="my-btn mt-4" type="submit") Tạo phòng chat
+        
